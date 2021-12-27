@@ -1,0 +1,4 @@
+.DS_Store
+/semana-agilizei/node_modules
+/semana-agilizei/package-lock.json
+/semana-agilizei/cypress/integration/examples

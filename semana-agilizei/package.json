@@ -1,0 +1,15 @@
+{
+  "name": "semana-agilizei",
+  "version": "1.0.0",
+  "description": "Modulo 2 - Chapter 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "author": "Railane Passos",
+  "license": "MIT",
+  "devDependencies": {
+    "chance": "^1.1.8",
+    "cypress": "^4.10.0"
+  }
+}

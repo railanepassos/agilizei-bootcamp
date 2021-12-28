@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-
+import 'cypress-file-upload';
 let Chance = require('chance');
 let chance = new Chance();
 
@@ -48,12 +48,11 @@ context('Cadastro', () => {
      */
 
     // Escrevendo em Campos
-    cy.get('input[ng-model^=First"]').type(chance.first());
+    cy.get('input[ng-model^="First"]').type(chance.first());
     cy.get('input[ng-model="LastName"]').type(chance.last());
     cy.get('textarea[ng-model="Adress"]').type(chance.address());
     cy.get('input[type="email"]').type(chance.email());
     cy.get('input[ng-model="Phone"]').type(chance.phone({ formatted: false, mobile: true }));
-    cy.get('input[type="tel"]').type(chance.phone({  formatted: false, mobile: false }));
 
     // Interagindo com campos de seleção unica e multipla (radio and checkbox)
     cy.get('input[value="FeMale"]').check();
@@ -63,11 +62,14 @@ context('Cadastro', () => {
     // Campos de seleção (combos)
     //cy.get('select#msdd').click();
     cy.get('select#Skills').select('Engineering');
-    cy.get('select#countries').select('Argentina');
+    //cy.get('select#countries').select('Japan'); Input isn't work
     cy.get('select#country').select('Japan', { force: true });
     cy.get('select#yearbox').select('2000');
     cy.get('select[ng-model="monthbox"]').select('July');
     cy.get('select#daybox').select('10');
+
+    // Envio de Imagem
+    cy.get('input#imagesrc').attachFile('image-photo.jpeg');
 
     // Senhas e Prosseguir
     cy.get('input#firstpassword').type('Password999');

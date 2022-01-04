@@ -1,9 +1,10 @@
 # 🤖 Primeiro projeto desenvolvido durante o Bootcamp Agilizei
 
 ## Tecnologias utilizadas:
-- node.js v14.17.0
-- cypress v4.10.0
-- chancejs
+- [node.js v14.17.0](https://nodejs.org/de/blog/release/v14.17.0/)
+- [cypress v4.10.0](https://docs.cypress.io/guides/references/changelog#4-10-0)
+- [chancejs](https://www.npmjs.com/package/chance)
+- [cypress-file-upload](https://www.npmjs.com/package/cypress-file-upload)
 - cucumber html reporter v5.4.0
 - faker v5.5.3
 

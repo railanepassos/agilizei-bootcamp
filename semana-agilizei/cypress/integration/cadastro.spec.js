@@ -5,6 +5,16 @@ let chance = new Chance();
 
 context('Cadastro', () => {
   it('Cadastro de usuário no site', () => {
+    // Rotas
+    // POST 200 /api/1/databases/userdetails/collections/newtable?apiKey= 
+    // POST 200 /api/1/databases/userdetails/collections/usertable?apiKey= 
+    // GET 200 /api/1/databases/userdetails/collections/newtable?apiKey= 
+
+    cy.server()
+    cy.route('POST', '**/api/1/databases/userdetails/collections/newtable?**').as('postNewTable');
+    cy.route('POST', '**/api/1/databases/userdetails/collections/usertable?**').as('postUserTable');
+    cy.route('POST', '**/api/1/databases/userdetails/collections/newtable?**').as('getNewTable');
+
     cy.visit('/Register.html');
 
     /**
@@ -62,7 +72,7 @@ context('Cadastro', () => {
     // Campos de seleção (combos)
     //cy.get('select#msdd').click();
     cy.get('select#Skills').select('Engineering');
-    //cy.get('select#countries').select('Japan'); Input isn't work
+    cy.get('select#countries').select('Japan'); // 🚨 Isn't work
     cy.get('select#country').select('Japan', { force: true });
     cy.get('select#yearbox').select('2000');
     cy.get('select[ng-model="monthbox"]').select('July');
@@ -76,6 +86,25 @@ context('Cadastro', () => {
     cy.get('input#secondpassword').type('Password999');
     cy.get('button#submitbtn').click();
     // cy.get('button#Button1');
+
+    // Interagindo com Rotas
+    cy.wait('@postNewTable').then((resNewTable) => {
+      cy.log(resNewTable.status);
+
+      // Usando Chai
+      expect(resNewTable.status).to.eq(200);
+      
+    })
+    cy.wait('@postUserTable').then((resUserTable) => {
+      expect(resUserTable.status).to.eq(200);
+      
+    })
+    cy.wait('@getNewTable').then((resNewTable) => {
+      expect(resNewTable.status).to.eq(200);
+      
+    })
+
+    cy.url().should('contain', 'WebTable')
 
   });
 });
